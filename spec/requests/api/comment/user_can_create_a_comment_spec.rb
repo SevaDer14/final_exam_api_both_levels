@@ -1,5 +1,5 @@
 RSpec.describe 'POST /api/articles/:id/comments', type: :request do
-  let(:articles) { create(:article) }
+  let(:article) { create(:article) }
   let(:user) { create(:user) }
   let(:auth_headers) { user.create_new_auth_token }
 
