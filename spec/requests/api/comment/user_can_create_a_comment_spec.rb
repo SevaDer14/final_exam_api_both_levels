@@ -43,7 +43,7 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
     before do
       post "/api/articles/#{article.id}/comments", params: {
         body: ''
-      }
+      }, headers: auth_headers
     end
 
     it 'is expected to respond with status 422' do
@@ -51,7 +51,7 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
     end
 
     it 'is expected to respond with success message' do
-      expect(response['error_message']).to eq 'Comment can not be empty'
+      expect(response_json['error_message']).to eq 'Comment can not be empty'
     end
   end
 end
