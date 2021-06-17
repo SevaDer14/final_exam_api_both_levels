@@ -17,6 +17,6 @@ RSpec.describe Comment, type: :model do
   describe 'Factories' do
     it 'is expected to have valid factory' do
       expect(create(:comment)).to be_valid
-    end    
+    end
   end
 end
