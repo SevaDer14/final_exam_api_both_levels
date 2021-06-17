@@ -5,7 +5,7 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
 
   describe 'successfully as a user' do
     before do
-      post "api/articles/#{article.id}/comments", params: {
+      post "/api/articles/#{article.id}/comments", params: {
         body: 'User\'s comment body'
       }, headers: auth_headers
     end
@@ -15,7 +15,7 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
     end
 
     it 'is expected to respond with success message' do
-      expect(response['message']).to eq 'Your comment has been created'
+      expect(response_json['message']).to eq 'Your comment has been created'
     end
 
     it 'is expected to create a comment' do
@@ -25,7 +25,7 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
 
   describe 'unsuccessfully with no auth headers' do
     before do
-      post "api/articles/#{article.id}/comments", params: {
+      post "/api/articles/#{article.id}/comments", params: {
         body: 'Visitors\'s comment body'
       }
     end
@@ -35,13 +35,13 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
     end
 
     it 'is expected to respond with success message' do
-      expect(response['error_message']).to eq 'Log in to create a comment'
+      expect(response_json['errors'].first).to eq 'You need to sign in or sign up before continuing.'
     end
   end
 
   describe 'unsuccessfully with empty body' do
     before do
-      post "api/articles/#{article.id}/comments", params: {
+      post "/api/articles/#{article.id}/comments", params: {
         body: ''
       }
     end
